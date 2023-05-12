@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block title %}index{% endblock %} {% block
+    content %}   
+    <div class="pricing-header">
+        Profilo <span class="main-color">di</span> {{username_amico}}
+    </div>
+    <!-- I suoi film preferiti SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                i suoi film preferiti
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in preferiti %}
+                <!-- MOVIE ITEM -->
+                <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                    <img src="{{film[2]}}" alt=""> 
+                    <div class="movie-item-content">
+                        <div class="movie-item-title">
+                            {{film[1]}}
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{film[3]}}</span>
+                            </div>
++                        </div>
+                    </div>
+                </a>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END i suoi film preferiti SECTION -->
+     <!-- film che consiglia SECTION -->
+     <div class="section">
+        <div class="container">
+            <div class="section-header">
+                film che consiglia
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in consigliati %}
+                <!-- MOVIE ITEM -->
+                <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                    <img src="{{film[2]}}" alt=""> 
+                    <div class="movie-item-content">
+                        <div class="movie-item-title">
+                            {{film[1]}}
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{film[3]}}</span>
+                            </div>
++                        </div>
+                    </div>
+                </a>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END film che consiglia SECTION -->
+    <!-- film in comune SECTION -->
+         <div class="section">
+            <div class="container">
+                <div class="section-header">
+                    film in comune
+                </div>
+                <div class="movies-slide carousel-nav-center owl-carousel">
+                    {% for film in comune %}
+                    <!-- MOVIE ITEM -->
+                    <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                        <img src="{{film[2]}}" alt=""> 
+                        <div class="movie-item-content">
+                            <div class="movie-item-title">
+                                {{film[1]}}
+                            </div>
+                        </div>
+                    </a>
+                    <!-- END MOVIE ITEM -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- END film in comune SECTION -->
+ {% endblock %}
+    

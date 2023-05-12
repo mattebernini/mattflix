@@ -1,0 +1,188 @@
+{% extends "base.html" %} {% block title %}index{% endblock %} {% block
+    content %}   
+    <!-- **************************************************** -->
+    {% if user.is_authenticated %}
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                Cerca film
+            </div>
+            <div class="box-search-box">
+                <form name="search-box" action="/" method="post">
+                    <input type="text" name="film" class="input-search-box">
+                    <input type="submit" placeholder="Cerca" class="submit-sb">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if cercato %}
+            <!-- film cercato SECTION -->
+            <div class="section">
+                <div class="container">
+                    <div class="section-header">
+                        film cercato
+                    </div>
+                    <div class="movies-slide carousel-nav-center owl-carousel">
+                        {% for film in ricerca %}
+                        <!-- MOVIE ITEM -->
+                        <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                            <img src="{{film[2]}}" alt=""> 
+                            <div class="movie-item-content">
+                                <div class="movie-item-title">
+                                    {{film[1]}}
+                                </div>
+                            </div>
+                        </a>
+                        <form id="rate_film_{{ film[0] }}" class="rate">
+                            <input type="radio" id="star5_{{ film[0] }}" name="rate_{{ film[0] }}" value="5" />
+                            <label for="star5_{{ film[0] }}" title="text">5 stars</label>
+                            <input type="radio" id="star4_{{ film[0] }}" name="rate_{{ film[0] }}" value="4" />
+                            <label for="star4_{{ film[0] }}" title="text">4 stars</label>
+                            <input type="radio" id="star3_{{ film[0] }}" name="rate_{{ film[0] }}" value="3" />
+                            <label for="star3_{{ film[0] }}" title="text">3 stars</label>
+                            <input type="radio" id="star2_{{ film[0] }}" name="rate_{{ film[0] }}" value="2" />
+                            <label for="star2_{{ film[0] }}" title="text">2 stars</label>
+                            <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
+                            <label for="star1_{{ film[0] }}" title="text">1 star</label>
+                        </form>
+                        <!-- END MOVIE ITEM -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- END film cercato SECTION -->
+    {% endif %}
+    <!-- I tuoi film preferiti SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                i tuoi film preferiti
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in preferiti %}
+                <!-- MOVIE ITEM -->
+                <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                    <img src="{{film[2]}}" alt=""> 
+                    <div class="movie-item-content">
+                        <div class="movie-item-title">
+                            {{film[1]}}
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{film[3]}}</span>
+                            </div>
++                        </div>
+                    </div>
+                </a>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END i tuoi film preferiti SECTION -->
+     <!-- film che consigli SECTION -->
+     <div class="section">
+        <div class="container">
+            <div class="section-header">
+                film che consigli
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in consigliati %}
+                <!-- MOVIE ITEM -->
+                <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                    <img src="{{film[2]}}" alt=""> 
+                    <div class="movie-item-content">
+                        <div class="movie-item-title">
+                            {{film[1]}}
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{film[3]}}</span>
+                            </div>
++                        </div>
+                    </div>
+                </a>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END film che consigli SECTION -->
+    <!-- tutti i film SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                tutti i film ({{tutti|length}})
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in tutti %}
+                <!-- MOVIE ITEM -->
+                <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                    <img src="{{film[2]}}" alt=""> 
+                    <div class="movie-item-content">
+                        <div class="movie-item-title">
+                            {{film[1]}}
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{film[3]}}</span>
+                            </div>
++                        </div>
+                    </div>
+                </a>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END tutti i film SECTION -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="{{ url_for('static',filename='js/film_rating.js') }}"></script>
+    {% else %}
+    <!-- **************************************************** -->
+        <!-- Homepage nologged -->
+        <div class="section">
+            <div class="hero-slide-item">
+                <img src="" alt="">
+                <div class="overlay"></div>
+                <div class="hero-slide-item-content">
+                    <div class="item-content-wraper">
+                        <div class="item-content-title">
+                            Accedi o crea un account!
+                        </div>
+                        <div class="movie-infos">
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>10</span>
+                            </div>
+                            <div class="movie-info">
+                                <i class="bx bxs-time"></i>
+                                <span>2 mins</span>
+                            </div>
+                            <div class="movie-info">
+                                <span>HD</span>
+                            </div>
+                            <div class="movie-info">
+                                <span>12+</span>
+                            </div>
+                        </div>
+                        <div class="item-content-description">
+                            Registarti per vedere i film preferiti dai tuoi amici e condividere i tuoi.
+                        </div>
+                        <div class="item-action">
+                            <a href="/signup" class="btn btn-hover">
+                                <i class="bx bxs-right-arrow"></i>
+                                <span>Registrati</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Homepage nologged -->    
+    {% endif %}
+{% endblock %}
+    

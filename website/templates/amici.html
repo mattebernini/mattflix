@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}index{% endblock %} {% block
+    content %}   
+    <!-- tutti utenti SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="pricing">
+                <div class="pricing-header">
+                    Matt<span class="main-color">fl</span>ix Users
+                </div>
+                <div class="pricing-list">
+                    <div class="row">
+                        {% for amico in tutti %}
+                        <div class="col-4 col-md-12 col-sm-12">
+                            <div class="pricing-box">
+                                <div class="pricing-box-action">
+                                    <a href="profilo/{{amico}}" class="btn btn-hover">
+                                        <span>{{amico}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END tutti utenti SECTION -->
+    <!-- miei amici SECTION -->
+        <div class="section">
+            <div class="container">
+                <div class="pricing">
+                    <div class="pricing-header">
+                        Miei<span class="main-color"> ami</span>ci
+                    </div>
+                    <div class="pricing-list">
+                        <div class="row">
+                            {% for amico in amici %}
+                            <div class="col-4 col-md-12 col-sm-12">
+                                <div class="pricing-box">
+                                    <div class="pricing-box-action">
+                                        <a href="profilo/{{amico}}" class="btn btn-hover">
+                                            <span>{{amico}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END miei amici SECTION -->
+{% endblock %}
+    
