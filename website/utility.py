@@ -2,7 +2,7 @@ from sqlalchemy import text, func, case, desc
 from flask import request
 from imdb import Cinemagoer, IMDbError
 from . import db
-from .models import Film, Recensione, Utente, Visite
+from .models import Film, Recensione, Utente, Visite, Seguaci
 
 def save_cookie(content):
     ip_addr = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)   
@@ -17,6 +17,8 @@ def query(sql_filename):
         q = f.read()
         return db.session.execute(text(q))
     
+# FIlms and Recensioni
+# *****************************************************
 def get_film_search(str):
     films = []
     ia = Cinemagoer()
@@ -72,7 +74,7 @@ def get_tutti_film(user_id):
 
 def get_comune(user1, user2):
     results =  db.session.execute(text(f"""
-    select recensione.imdb_id_film, title, img_url
+    select recensione.imdb_id_film, title, img_url, voto_utente, year, tipo, consigliato
     from recensione inner join film
         on recensione.imdb_id_film = film.imdb_id_film
     where id_utente = {user1} and film.imdb_id_film in (
@@ -84,8 +86,17 @@ def get_comune(user1, user2):
     """))
     return results
 
-def get_amici(user_id):
-    return []
+# Users
+# *****************************************************
+def get_seguiti(user_id):
+    res = db.session.query(Seguaci, Utente).join(Utente, Utente.id == Seguaci.segue).\
+            filter(Seguaci.id_utente == user_id)
+    return [u.username for s, u in res.all()]
 
-def get_tutti_utenti():
-    return [u.username for u in db.session.query(Utente)]
+def get_ti_seguono(user_id):
+    res = db.session.query(Seguaci, Utente).join(Utente, Utente.id == Seguaci.id_utente).\
+            filter(Seguaci.segue == user_id)
+    return [u.username for s, u in res.all()]
+
+def get_tutti_utenti(user_id):
+    return [u.username for u in db.session.query(Utente).filter(Utente.id != user_id)]

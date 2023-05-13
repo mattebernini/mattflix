@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
-from website.utility import get_comune, get_amici, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
+from website.utility import get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
 from flask_login import login_required, current_user
-from .models import Utente
+from .models import Utente, Seguaci
 from . import db
 
 frontend = Blueprint('frontend', __name__)
@@ -32,8 +32,9 @@ def index():
 def amici():
     save_cookie("amici")
     return render_template("amici.html",
-                           amici = get_amici(current_user.id),
-                           tutti = get_tutti_utenti(),
+                           seguiti = get_seguiti(current_user.id),
+                           ti_seguono = get_ti_seguono(current_user.id),
+                           tutti = get_tutti_utenti(current_user.id),
                             user=current_user)
 
 @login_required
@@ -41,12 +42,13 @@ def amici():
 def profilo(username_amico):
     save_cookie("profilo/"+username_amico)
     id_amico =  db.session.query(Utente).filter(Utente.username == username_amico).first().id
-    preferiti = get_preferiti(id_amico)   
-    consigliati = get_consigliati(id_amico)
-    comune = get_comune(current_user.id, id_amico)
+    segue_gia =  Seguaci.query.filter_by(id_utente=current_user.id, segue=id_amico).first()
+    gia_seguito = False if not segue_gia else True
     return render_template("profilo.html",
-                            preferiti = preferiti,
-                            comune = comune,
-                            consigliati = consigliati,
+                            preferiti = get_preferiti(id_amico),
+                            comune = get_comune(current_user.id, id_amico),
+                            gia_seguito = gia_seguito,
+                            consigliati = get_consigliati(id_amico),
                             username_amico = username_amico,
+                            id_amico = id_amico,
                             user=current_user)

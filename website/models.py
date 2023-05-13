@@ -17,6 +17,11 @@ class Utente(db.Model, UserMixin):
     password = db.Column(db.String(150))
     username = db.Column(db.String(150))
 
+class Seguaci(db.Model):
+    __tablename__ = "seguaci"
+    id_utente = db.Column(db.Integer, primary_key=True)
+    segue = db.Column(db.Integer, primary_key=True)
+
 # film
 class Film(db.Model):
     __tablename__ = "film"

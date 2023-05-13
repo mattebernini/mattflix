@@ -1,56 +1,61 @@
 {% extends "base.html" %} {% block title %}index{% endblock %} {% block
     content %}   
+    <!-- seguiti SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="pricing-header">
+                seg<span class="main-color">ui</span>ti
+            </div>
+            <div class="amici-container">
+                <div class="row">
+                {% for amico in seguiti %}
+                <div class="amico-box">
+                    <a href="profilo/{{amico}}">
+                        <span>{{amico}}</span>
+                </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END seguiti SECTION -->
+    <!-- ti seguono SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="pricing-header">
+                ti seg<span class="main-color">uo</span>no
+            </div>
+            <div class="amici-container">
+                <div class="row">
+                {% for amico in ti_seguono %}
+                <div class="amico-box">
+                    <a href="profilo/{{amico}}">
+                        <span>{{amico}}</span>
+                </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END ti seguono SECTION -->
     <!-- tutti utenti SECTION -->
     <div class="section">
         <div class="container">
-            <div class="pricing">
-                <div class="pricing-header">
-                    Matt<span class="main-color">fl</span>ix Users
+            <div class="pricing-header">
+                utenti Matt<span class="main-color">fl</span>ix
+            </div>
+            <div class="amici-container">
+            <div class="row">
+                {% for amico in tutti %}
+                <div class="amico-box">
+                <a href="profilo/{{amico}}">
+                    <span>{{amico}}</span>
+                </a>
                 </div>
-                <div class="pricing-list">
-                    <div class="row">
-                        {% for amico in tutti %}
-                        <div class="col-4 col-md-12 col-sm-12">
-                            <div class="pricing-box">
-                                <div class="pricing-box-action">
-                                    <a href="profilo/{{amico}}" class="btn btn-hover">
-                                        <span>{{amico}}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <!-- END tutti utenti SECTION -->
-    <!-- miei amici SECTION -->
-        <div class="section">
-            <div class="container">
-                <div class="pricing">
-                    <div class="pricing-header">
-                        Miei<span class="main-color"> ami</span>ci
-                    </div>
-                    <div class="pricing-list">
-                        <div class="row">
-                            {% for amico in amici %}
-                            <div class="col-4 col-md-12 col-sm-12">
-                                <div class="pricing-box">
-                                    <div class="pricing-box-action">
-                                        <a href="profilo/{{amico}}" class="btn btn-hover">
-                                            <span>{{amico}}</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END miei amici SECTION -->
 {% endblock %}
     
