@@ -46,7 +46,7 @@ def get_film_data(id):
     return movie
 
 def get_preferiti(user_id):
-    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente).\
+    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo).\
             join(Film, Recensione.imdb_id_film == Film.imdb_id_film).\
             filter(Recensione.id_utente == user_id).\
             order_by(desc(Recensione.voto_utente)).\
@@ -54,11 +54,19 @@ def get_preferiti(user_id):
     return results
 
 def get_consigliati(user_id):
-    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente)\
+    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo)\
             .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
             .filter(Recensione.id_utente == user_id, Recensione.consigliato == 1)\
             .order_by(Recensione.voto_utente.desc())\
             .limit(10)\
+            .all()
+    return results
+
+def get_tutti_film(user_id):
+    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo)\
+            .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
+            .filter(Recensione.id_utente == user_id)\
+            .order_by(Recensione.imdb_id_film.desc())\
             .all()
     return results
 
@@ -74,13 +82,6 @@ def get_comune(user1, user2):
     )
     order by voto_utente desc
     """))
-    return results
-
-def get_tutti_film(user_id):
-    results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente)\
-            .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
-            .filter(Recensione.id_utente == user_id)\
-            .all()
     return results
 
 def get_amici(user_id):

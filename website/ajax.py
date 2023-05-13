@@ -29,3 +29,13 @@ def submit_rating():
 
     # Return success response
     return {'success': True}
+
+@login_required
+@ajax.route('/submit_consiglia', methods=['POST'])
+def submit_consiglia():
+    consiglia = request.form['consiglia']
+    film_id = request.form['film_id']
+    print(f"{current_user.username}, {film_id}, {consiglia}")
+
+    # Return success response
+    return {'success': True}

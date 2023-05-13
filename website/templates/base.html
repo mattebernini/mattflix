@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/search-box.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/flash.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/rate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/consiglia.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
@@ -29,13 +30,12 @@
     <div class="nav-wrapper">
         <div class="container">
             <div class="nav">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <i class='bx bx-movie-play bx-tada main-color'></i>Matt<span class="main-color">fl</span>ix
                 </a>
                 <ul class="nav-menu" id="nav-menu">
                     {% if user.is_authenticated %}
                     <li><a href="/amici">Amici</a></li>
-                    <li><a href="/consiglia">Consiglia</a></li>
                     <li><a href="/logout">Logout</a></li>
                     <li>
                         <a href="/" class="btn btn-hover">
