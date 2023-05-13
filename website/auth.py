@@ -36,7 +36,7 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            flash('Account creato!', category='success')
             return redirect(url_for('frontend.index'))
 
     return render_template("auth/signup.html", user=current_user)
@@ -52,13 +52,13 @@ def login():
         user = Utente.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash('Login effettuato!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('frontend.index'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Password errata.', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('Questa email non esiste.', category='error')
 
     return render_template("auth/login.html", user=current_user)
 

@@ -7,4 +7,9 @@ https://imdbpy.readthedocs.io/en/latest/usage/movie.html
 https://www.omdbapi.com/
 
 # idee
-film in comune coi tuoi amici
+da vedere
+
+
+# issues
+numero stelle full-size
+immagini blurry
