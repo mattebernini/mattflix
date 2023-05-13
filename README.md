@@ -9,9 +9,7 @@ https://www.omdbapi.com/
 # idee
 da vedere
 
-
 # issues
-immagini blurry
 
 
 # deploying

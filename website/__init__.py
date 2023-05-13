@@ -14,9 +14,11 @@ def create_app():
     from .frontend import frontend
     from .auth import auth
     from .ajax import ajax
+    from .management import management
 
     app.register_blueprint(frontend, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(management, url_prefix='/')
     app.register_blueprint(ajax, url_prefix='/ajax')
 
     from .models import Utente

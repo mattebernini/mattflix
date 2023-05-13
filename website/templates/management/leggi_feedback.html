@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+      <h2 class="text-center">feedback</h2>
+        <tr>
+            <th>Username</th>
+            <th>feedback</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fb in feedback %}
+        <tr>
+            {% for d in fb %}
+            <td>{{d}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

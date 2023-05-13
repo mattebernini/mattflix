@@ -9,6 +9,12 @@ class Visite(db.Model):
     content = db.Column(db.String, unique=False)
     ip_addr = db.Column(db.String, unique=False)    
 
+class Feedback(db.Model):
+    __tablename__ = "Feedback"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_utente = db.Column(db.Integer)
+    text = db.Column(db.String(500))
+
 # auth
 class Utente(db.Model, UserMixin):
     __tablename__ = "utente"

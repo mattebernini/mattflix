@@ -2,7 +2,7 @@ from sqlalchemy import text, func, case, desc
 from flask import request
 from imdb import Cinemagoer, IMDbError
 from . import db
-from .models import Film, Recensione, Utente, Visite, Seguaci
+from .models import Film, Recensione, Utente, Visite, Seguaci, Feedback
 import os 
 
 def save_cookie(content):
@@ -110,3 +110,7 @@ def get_ti_seguono(user_id):
 
 def get_tutti_utenti(user_id):
     return [u.username for u in db.session.query(Utente).filter(Utente.id != user_id)]
+
+def get_feedback():
+    return db.session.query(Utente.username, Feedback.text)\
+        .join(Utente, Utente.id == Feedback.id_utente).all()
