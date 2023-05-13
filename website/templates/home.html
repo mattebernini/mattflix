@@ -47,7 +47,7 @@
                                 <label for="star1_{{ film[0] }}" title="text">1 star</label>
                             </form>
                             <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
-                                <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" />
+                                <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" value="{{film[6]}}" />
                                 <label for="consiglia">
                                     Consiglia
                                     <div></div>
@@ -106,7 +106,11 @@
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
                     <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
-                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" />
+                        {% if film[6] == 1 %}
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
+                        {% else %}
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
+                        {% endif %}
                         <label for="consiglia">
                             Consiglia
                             <div></div>
@@ -163,7 +167,7 @@
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
                     <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
-                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" />
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" value="{{film[6]}}" />
                         <label for="consiglia">
                             Consiglia
                             <div></div>
@@ -220,7 +224,7 @@
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
                     <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
-                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" />
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" value="{{film[6]}}" />
                         <label for="consiglia">
                             Consiglia
                             <div></div>

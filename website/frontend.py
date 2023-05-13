@@ -10,10 +10,7 @@ frontend = Blueprint('frontend', __name__)
 def index():
     save_cookie("index")
     cercato = False
-    ricerca = []
-    preferiti = []
-    consigliati = []
-    tutti = []
+    tutti = consigliati = ricerca = preferiti = []
     if current_user.is_authenticated:
         preferiti = get_preferiti(current_user.id)   
         consigliati = get_consigliati(current_user.id)
