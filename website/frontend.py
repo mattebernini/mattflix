@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request
-from website.utility import get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
+from website.utility import clean_up_img_urls, get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
 from flask_login import login_required, current_user
 from .models import Utente, Seguaci
 from . import db
 
 frontend = Blueprint('frontend', __name__)
+
 
 @frontend.route('/', methods=['GET', 'POST'])
 def index():

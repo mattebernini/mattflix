@@ -3,6 +3,7 @@ from flask import request
 from imdb import Cinemagoer, IMDbError
 from . import db
 from .models import Film, Recensione, Utente, Visite, Seguaci
+import os 
 
 def save_cookie(content):
     ip_addr = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)   
@@ -17,6 +18,14 @@ def query(sql_filename):
         q = f.read()
         return db.session.execute(text(q))
     
+# https://github.com/cinemagoer/cinemagoer/issues/146
+def pulisci_img_url(url):
+    base, ext = os.path.splitext(url)
+    i = url.count('@')
+    s2 = url.split('@')[0]
+    url = s2 + '@' * i + ext
+    return url
+
 # FIlms and Recensioni
 # *****************************************************
 def get_film_search(str):
@@ -32,7 +41,7 @@ def get_film_search(str):
         # togliere film già visti
         id = search[i].movieID
         url_img = search[i]['cover url'] if 'cover url'in search[i] else ""
-        film = [id, search[i]['title'], url_img]
+        film = [id, search[i]['title'], pulisci_img_url(url_img)]
         films.append(film)
         if i > 15:
             break
@@ -43,6 +52,7 @@ def get_film_data(id):
     try:
         ia = Cinemagoer()
         movie = ia.get_movie(id)
+        movie['cover url'] = pulisci_img_url(movie['cover url'])
     except IMDbError as e:
         print(e)
     return movie
