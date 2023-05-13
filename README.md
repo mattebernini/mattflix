@@ -11,8 +11,8 @@ da vedere
 
 
 # issues
-numero stelle full-size
 immagini blurry
+
 
 # deploying
 git push --set-upstream live master

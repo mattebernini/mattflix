@@ -1,7 +1,8 @@
 .rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: auto;
 }
 .rate:not(:checked) > input[type="radio"] {
     position:absolute;
