@@ -3,8 +3,9 @@ $(document).ready(function() {
       
     var consigliaValue = $(this).is(':checked');
     var form_id = $(this).closest('form').attr('id');
-    var film_id = form_id.split('_')[1];  
-      
+    var film_id = form_id.split('_')[2];  
+    console.log(film_id);
+
       $.ajax({
         type: 'POST',
         url: 'ajax/submit_consiglia',

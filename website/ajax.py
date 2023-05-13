@@ -14,7 +14,7 @@ def submit_rating():
     film_id = request.form['film_id']
     print(f"{current_user.username}, {film_id}, {rating}")
 
-    # salvo nel database
+    # se il film non è in locale lo salvo
     film = Film.query.filter_by(imdb_id_film=film_id).first()
     if not film:
         film_data = get_film_data(film_id)  
@@ -22,12 +22,14 @@ def submit_rating():
             film = Film(imdb_id_film=film_id, title=film_data['title'], rating=film_data['rating'], tipo=film_data['kind'], year=film_data['year'], img_url=film_data['cover url'])
             db.session.add(film)
             db.session.commit()
-
-    recensione = Recensione(id_utente=current_user.id, imdb_id_film=film_id, voto_utente=rating, consigliato=0)
-    db.session.add(recensione)
+    # controllo se la recensione esiste già
+    vecchia_recensione = Recensione.query.filter_by(imdb_id_film=film_id, id_utente=current_user.id).first()
+    if not vecchia_recensione:
+        nuova_recensione = Recensione(id_utente=current_user.id, imdb_id_film=film_id, voto_utente=rating, consigliato=0)
+        db.session.add(nuova_recensione)
+    else:
+        vecchia_recensione.voto_utente = rating
     db.session.commit()
-
-    # Return success response
     return {'success': True}
 
 @login_required
@@ -37,5 +39,11 @@ def submit_consiglia():
     film_id = request.form['film_id']
     print(f"{current_user.username}, {film_id}, {consiglia}")
 
-    # Return success response
+    # controllo se la recensione esiste già
+    vecchia_recensione = Recensione.query.filter_by(imdb_id_film=film_id, id_utente=current_user.id).first()
+    if not vecchia_recensione:
+        return {'success': False}
+    # se e solo se esiste aggiorno consiglia
+    vecchia_recensione.consigliato = 1 if consiglia=="true" else 0
+    db.session.commit()
     return {'success': True}
