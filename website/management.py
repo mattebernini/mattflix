@@ -26,5 +26,6 @@ def leggi_feedback():
         return redirect("/")
     return render_template("management/leggi_feedback.html",
                            feedback = get_feedback(),
+                           generali = query("generali").mappings().all(),
                            info_users = query("utenti"),
                             user=current_user)
