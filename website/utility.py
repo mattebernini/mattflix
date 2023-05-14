@@ -83,7 +83,7 @@ def get_da_vedere(user_id):
 def get_tutti_film(user_id):
     results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo, Recensione.consigliato, Recensione.da_vedere)\
             .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
-            .filter(Recensione.id_utente == user_id)\
+            .filter(Recensione.id_utente == user_id, Recensione.voto_utente > 1)\
             .order_by(Recensione.imdb_id_film.desc())\
             .all()
     return results
