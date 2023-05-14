@@ -6,56 +6,65 @@
             <div class="pricing-header">
                 seg<span class="main-color">ui</span>ti
             </div>
-            <div class="amici-container">
-                <div class="row">
+            <div class="movies-slide carousel-nav-center owl-carousel">
                 {% for amico in seguiti %}
-                <div class="amico-box">
-                    <a href="profilo/{{amico}}">
-                        <span>{{amico}}</span>
+                <!-- AMICO ITEM -->
+                <a href="/profilo/{{amico}}" class="amico-item">
+                    <div class="amico-item-content">
+                        <div class="amico-item-title">
+                            {{amico}}
+                        </div>
+                    </div>
                 </a>
-                </div>
+                <!-- END AMICO ITEM -->
                 {% endfor %}
             </div>
         </div>
     </div>
     <!-- END seguiti SECTION -->
-    <!-- ti seguono SECTION -->
+    <!-- ti_seguono SECTION -->
     <div class="section">
         <div class="container">
             <div class="pricing-header">
-                ti seg<span class="main-color">uo</span>no
+                Ti seg<span class="main-color">uo</span>no
             </div>
-            <div class="amici-container">
-                <div class="row">
+            <div class="movies-slide carousel-nav-center owl-carousel">
                 {% for amico in ti_seguono %}
-                <div class="amico-box">
-                    <a href="profilo/{{amico}}">
-                        <span>{{amico}}</span>
+                <!-- AMICO ITEM -->
+                <a href="/profilo/{{amico}}" class="amico-item">
+                    <div class="amico-item-content">
+                        <div class="amico-item-title">
+                            {{amico}}
+                        </div>
+                    </div>
                 </a>
-                </div>
+                <!-- END AMICO ITEM -->
                 {% endfor %}
             </div>
         </div>
     </div>
-    <!-- END ti seguono SECTION -->
-    <!-- tutti utenti SECTION -->
+    <!-- END ti_seguono SECTION -->
+    <!-- tutti SECTION -->
     <div class="section">
         <div class="container">
             <div class="pricing-header">
                 utenti Matt<span class="main-color">fl</span>ix
             </div>
-            <div class="amici-container">
-            <div class="row">
+            <div class="movies-slide carousel-nav-center owl-carousel">
                 {% for amico in tutti %}
-                <div class="amico-box">
-                <a href="profilo/{{amico}}">
-                    <span>{{amico}}</span>
+                <!-- AMICO ITEM -->
+                <a href="/profilo/{{amico}}" class="amico-item">
+                    <div class="amico-item-content">
+                        <div class="amico-item-title">
+                            {{amico}}
+                        </div>
+                    </div>
                 </a>
-                </div>
+                <!-- END AMICO ITEM -->
                 {% endfor %}
             </div>
         </div>
     </div>
-    <!-- END tutti utenti SECTION -->
+    <!-- END tutti SECTION -->
 {% endblock %}
     
