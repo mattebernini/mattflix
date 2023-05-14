@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
-from website.utility import get_feedback
+from website.utility import get_feedback, query
 from flask_login import login_required, current_user
 from .models import Utente, Seguaci, Feedback
 from . import db
@@ -26,4 +26,5 @@ def leggi_feedback():
         return redirect("/")
     return render_template("management/leggi_feedback.html",
                            feedback = get_feedback(),
+                           info_users = query("utenti"),
                             user=current_user)

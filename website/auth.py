@@ -14,7 +14,7 @@ def sign_up():
     save_cookie("signup")
     if request.method == 'POST':
         email = request.form.get('email')
-        username = request.form.get('username').lower()
+        username = request.form.get('username').lower().strip()
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
