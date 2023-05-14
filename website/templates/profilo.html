@@ -65,11 +65,7 @@
                         </label>
                     </form>
                     <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
-                        {% if film[7] == 1 %}
-                        <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere" checked/>
-                        {% else %}
                         <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
-                        {% endif %}
                         <label for="da_vedere">
                             Da Vedere
                             <div></div>
@@ -132,6 +128,13 @@
                             <div></div>
                         </label>
                     </form>
+                    <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
+                        <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
+                        <label for="da_vedere">
+                            Da Vedere
+                            <div></div>
+                        </label>
+                    </form>
                 </div>
                 <!-- END MOVIE ITEM -->
                 {% endfor %}
@@ -183,22 +186,14 @@
                             <label for="star1_{{ film[0] }}" title="text">1 star</label>
                         </form>
                         <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
-                            {% if film[6] == 1 %}
-                            <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
-                            {% else %}
                             <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
-                            {% endif %}
                             <label for="consiglia">
                                 Consiglia
                                 <div></div>
                             </label>
                         </form>
                         <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
-                                {% if film[7] == 1 %}
-                                <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere" checked/>
-                                {% else %}
                                 <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
-                                {% endif %}
                                 <label for="da_vedere">
                                     Da Vedere
                                     <div></div>
@@ -255,27 +250,19 @@
                             <label for="star1_{{ film[0] }}" title="text">1 star</label>
                         </form>
                         <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
-                            {% if film[6] == 1 %}
-                            <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
-                            {% else %}
                             <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
-                            {% endif %}
                             <label for="consiglia">
                                 Consiglia
                                 <div></div>
                             </label>
                         </form>
                         <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
-                                {% if film[7] == 1 %}
-                                <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere" checked/>
-                                {% else %}
                                 <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
-                                {% endif %}
                                 <label for="da_vedere">
                                     Da Vedere
                                     <div></div>
                                 </label>
-                            </form>
+                        </form>
                     </div>
                     <!-- END MOVIE ITEM -->
                     {% endfor %}
