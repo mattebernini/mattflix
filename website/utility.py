@@ -115,7 +115,7 @@ def get_ti_seguono(user_id):
     return [u.username for s, u in res.all()]
 
 def get_tutti_utenti(user_id):
-    return [u.username for u in db.session.query(Utente).filter(Utente.id != user_id)]
+    return [u.username for u in db.session.query(Utente).filter(Utente.id != user_id).order_by(Utente.id.desc())]
 
 def get_feedback():
     return db.session.query(Utente.username, Feedback.text)\
