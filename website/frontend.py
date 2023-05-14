@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from website.utility import get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
+from website.utility import get_da_vedere, get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
 from flask_login import login_required, current_user
 from .models import Utente, Seguaci
 from . import db
@@ -11,11 +11,12 @@ frontend = Blueprint('frontend', __name__)
 def index():
     # save_cookie("index")
     cercato = False
-    tutti = consigliati = ricerca = preferiti = []
+    da_vedere = tutti = consigliati = ricerca = preferiti = []
     if current_user.is_authenticated:
         preferiti = get_preferiti(current_user.id)   
         consigliati = get_consigliati(current_user.id)
         tutti = get_tutti_film(current_user.id)
+        da_vedere = get_da_vedere(current_user.id)
     if request.method == "POST":
         filmname = request.form.get("film")
         ricerca = get_film_search(filmname)
@@ -25,6 +26,7 @@ def index():
                             preferiti = preferiti,
                             consigliati = consigliati,
                             tutti = tutti,
+                            da_vedere = da_vedere,
                             ricerca = ricerca,
                             user=current_user)
 

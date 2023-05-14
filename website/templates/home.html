@@ -8,7 +8,8 @@
                 Cerca 
             </div>
             <div class="item-content-description" style="margin-bottom: 20px;">
-                Cerca un film, dagli un voto e se lo vuoi condividere con i tuoi amici clicca su consiglia.
+                Cerca un film, dagli un voto (da 1 a 5 stelle) e se lo vuoi condividere con i tuoi amici clicca su "Consiglia"! 
+                <br>Se vuoi ricordarti di vedere un film clicca su "Da Vedere".
             </div>
             <div class="box-search-box">
                 <form name="search-box" action="/" method="post">
@@ -22,9 +23,6 @@
             <!-- film cercato SECTION -->
             <div class="section">
                 <div class="container">
-                    <div class="section-header">
-                        mattflix ha trovato...
-                    </div>
                     <div class="movies-slide carousel-nav-center owl-carousel">
                         {% for film in ricerca %}
                         <!-- MOVIE ITEM -->
@@ -49,10 +47,25 @@
                                 <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
                                 <label for="star1_{{ film[0] }}" title="text">1 star</label>
                             </form>
-                            <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
-                                <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" value="{{film[6]}}" />
+                            <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
+                                {% if film[6] == 1 %}
+                                <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
+                                {% else %}
+                                <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
+                                {% endif %}
                                 <label for="consiglia">
                                     Consiglia
+                                    <div></div>
+                                </label>
+                            </form>
+                            <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
+                                {% if film[7] == 1 %}
+                                <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere" checked/>
+                                {% else %}
+                                <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
+                                {% endif %}
+                                <label for="da_vedere">
+                                    Da Vedere
                                     <div></div>
                                 </label>
                             </form>
@@ -65,6 +78,78 @@
             <!-- END film cercato SECTION -->
     <!-- **************************************************** -->
     {% endif %}
+    <!-- I film da vedere SECTION -->
+    <div class="section">
+        <div class="container">
+            <div class="section-header">
+                cosa vedere
+            </div>
+            <div class="movies-slide carousel-nav-center owl-carousel">
+                {% for film in da_vedere %}
+                <!-- MOVIE ITEM -->
+                <div class="movie-item-wrapper">
+                    <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                        <img src="{{film[2]}}" alt=""> 
+                        <div class="movie-item-content">
+                            <div class="movie-item-title">
+                                {{film[1]}}
+                            </div>
+                            <div class="movie-infos">
+                                <div class="movie-info">
+                                    <i class="bx bxs-star"></i>
+                                    <span>{{film[3]}}</span>
+                                </div>
+                                <div class="movie-info">
+                                    <i class="bx bxs-time"></i>
+                                    <span>{{film[4]}}</span>
+                                </div>
+                                <div class="movie-info">
+                                    <span>{{film[5]}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <form id="rate_film_{{ film[0] }}" class="rate">
+                        <input type="radio" id="star5_{{ film[0] }}" name="rate_{{ film[0] }}" value="5" />
+                        <label for="star5_{{ film[0] }}" title="text">5 stars</label>
+                        <input type="radio" id="star4_{{ film[0] }}" name="rate_{{ film[0] }}" value="4" />
+                        <label for="star4_{{ film[0] }}" title="text">4 stars</label>
+                        <input type="radio" id="star3_{{ film[0] }}" name="rate_{{ film[0] }}" value="3" />
+                        <label for="star3_{{ film[0] }}" title="text">3 stars</label>
+                        <input type="radio" id="star2_{{ film[0] }}" name="rate_{{ film[0] }}" value="2" />
+                        <label for="star2_{{ film[0] }}" title="text">2 stars</label>
+                        <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
+                        <label for="star1_{{ film[0] }}" title="text">1 star</label>
+                    </form>
+                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
+                        {% if film[6] == 1 %}
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
+                        {% else %}
+                        <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
+                        {% endif %}
+                        <label for="consiglia">
+                            Consiglia
+                            <div></div>
+                        </label>
+                    </form>
+                    <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
+                        {% if film[7] == 1 %}
+                        <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere" checked/>
+                        {% else %}
+                        <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
+                        {% endif %}
+                        <label for="da_vedere">
+                            Da Vedere
+                            <div></div>
+                        </label>
+                    </form>
+                </div>
+                <!-- END MOVIE ITEM -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- END i film da vedere SECTION -->
     <!-- I tuoi film preferiti SECTION -->
     <div class="section">
         <div class="container">
@@ -111,7 +196,7 @@
                         <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
-                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
+                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
                         {% if film[6] == 1 %}
                         <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
                         {% else %}
@@ -172,7 +257,7 @@
                         <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
-                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
+                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
                         {% if film[6] == 1 %}
                         <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
                         {% else %}
@@ -183,6 +268,7 @@
                             <div></div>
                         </label>
                     </form>
+                
                 </div>
                 <!-- END MOVIE ITEM -->
                 {% endfor %}
@@ -233,7 +319,7 @@
                         <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
                         <label for="star1_{{ film[0] }}" title="text">1 star</label>
                     </form>
-                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
+                    <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
                         {% if film[6] == 1 %}
                         <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
                         {% else %}
@@ -244,6 +330,7 @@
                             <div></div>
                         </label>
                     </form>
+                    
                 </div>
                 <!-- END MOVIE ITEM -->
                 {% endfor %}
@@ -254,6 +341,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="{{ url_for('static',filename='js/film_rating.js') }}"></script>
     <script src="{{ url_for('static',filename='js/consiglia_film.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/da_vedere.js') }}"></script>
     {% else %}
     <!-- **************************************************** -->
         <!-- Homepage nologged -->

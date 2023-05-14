@@ -49,6 +49,32 @@ def submit_consiglia():
     return {'success': True}
 
 @login_required
+@ajax.route('/submit_da_vedere', methods=['POST'])
+def submit_da_vedere():
+    da_vedere = request.form['da_vedere']
+    da_vedere = 1 if da_vedere=="true" else 0
+    film_id = request.form['film_id']
+    print(f"{current_user.username}, {film_id}, {da_vedere}")
+    
+    # se il film non è in locale lo salvo
+    film = Film.query.filter_by(imdb_id_film=film_id).first()
+    if not film:
+        film_data = get_film_data(film_id)  
+        if film_data:
+            film = Film(imdb_id_film=film_id, title=film_data['title'], rating=film_data['rating'], tipo=film_data['kind'], year=film_data['year'], img_url=film_data['cover url'])
+            db.session.add(film)
+            db.session.commit()
+    # controllo se la recensione esiste già
+    vecchia_recensione = Recensione.query.filter_by(imdb_id_film=film_id, id_utente=current_user.id).first()
+    if not vecchia_recensione:
+        nuova_recensione = Recensione(id_utente=current_user.id, imdb_id_film=film_id, da_vedere=da_vedere, consigliato=0)
+        db.session.add(nuova_recensione)
+    else:
+        vecchia_recensione.da_vedere = da_vedere
+    db.session.commit()
+    return {'success': True}
+
+@login_required
 @ajax.route('/segui', methods=['POST'])
 def segui():
     id_amico = request.form['id_amico']

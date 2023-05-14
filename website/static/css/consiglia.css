@@ -1,6 +1,6 @@
 /*https://codepen.io/bgebelein/pen/BaqxBar*/
 
-.consiglia_film_checkbox input{
+.checkbox input{
     appearance: none;
     height: 1.5rem;
     width: 3rem;
@@ -18,7 +18,7 @@
     }
   }
   
-.consiglia_film_checkbox input::after{
+.checkbox input::after{
     content: "";
     display: block;
     position: absolute;
@@ -33,7 +33,7 @@
     transition: transform .2s ease;
   }
   
-.consiglia_film_checkbox input::before{
+.checkbox input::before{
     display: block;
     position: absolute;
     margin: .25rem .5rem;
@@ -42,7 +42,7 @@
     color: red;
   }
   
-.consiglia_film_checkbox input:checked{
+.checkbox input:checked{
     background-color: #7e1b10;
     
     &:hover{

@@ -45,3 +45,5 @@ class Recensione(db.Model):
     imdb_id_film = db.Column(db.Integer)
     voto_utente = db.Column(db.Integer)
     consigliato = db.Column(db.Integer)
+    da_vedere = db.Column(db.Integer)
+    
