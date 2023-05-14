@@ -8,7 +8,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'parola segreta segretissima'    
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:7yYzL~WJ?G2/RyP@16.16.127.54/flix"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:7yYzL~WJ?G2/RyP@16.16.104.53/flix"
     db.init_app(app)
 
     from .frontend import frontend
