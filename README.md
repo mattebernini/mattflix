@@ -7,7 +7,8 @@ https://imdbpy.readthedocs.io/en/latest/usage/movie.html
 https://www.omdbapi.com/
 
 # idee
-da vedere
+film peggiori
+ai sui gusti
 
 # issues
 

@@ -8,7 +8,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: 'POST',
-        url: 'ajax/submit_da_vedere',
+        url: '/ajax/submit_da_vedere',
         data: { 
             'da_vedere': da_vedereValue, 
             'film_id': film_id 

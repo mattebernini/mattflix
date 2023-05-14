@@ -8,7 +8,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: 'POST',
-        url: 'ajax/submit_consiglia',
+        url: '/ajax/submit_consiglia',
         data: { 
             'consiglia': consigliaValue, 
             'film_id': film_id 

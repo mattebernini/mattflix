@@ -6,7 +6,7 @@ $(document).ready(function() {
       
       $.ajax({
         type: 'POST',
-        url: 'ajax/submit_rating',
+        url: '/ajax/submit_rating',
         data: { 
             'rating': rating, 
             'film_id': film_id 
