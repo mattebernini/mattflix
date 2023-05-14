@@ -60,9 +60,8 @@ def get_film_data(id):
 def get_preferiti(user_id):
     results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo, Recensione.consigliato).\
             join(Film, Recensione.imdb_id_film == Film.imdb_id_film).\
-            filter(Recensione.id_utente == user_id).\
-            order_by(desc(Recensione.voto_utente)).\
-            limit(10).all()
+            filter(Recensione.id_utente == user_id, Recensione.voto_utente == 5).\
+            order_by(desc(Recensione.imdb_id_film)).all()
     return results
 
 def get_consigliati(user_id):
@@ -70,7 +69,6 @@ def get_consigliati(user_id):
             .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
             .filter(Recensione.id_utente == user_id, Recensione.consigliato == 1)\
             .order_by(Recensione.voto_utente.desc())\
-            .limit(10)\
             .all()
     return results
 

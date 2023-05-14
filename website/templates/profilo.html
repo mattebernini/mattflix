@@ -14,15 +14,11 @@
             </a>
         </div>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script src="{{ url_for('static',filename='js/film_rating.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/consiglia_film.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/segui.js') }}"></script>
     <!-- I suoi film preferiti SECTION -->
     <div class="section">
         <div class="container">
             <div class="section-header">
-                preferiti
+                preferiti di {{username_amico}}
             </div>
             <div class="movies-slide carousel-nav-center owl-carousel">
                 {% for film in preferiti %}
@@ -193,5 +189,71 @@
             </div>
         </div>
         <!-- END film in comune SECTION -->
+        <!-- tutti SECTION -->
+        <div class="section">
+            <div class="container">
+                <div class="section-header">
+                    tutti ({{tutti|length}}) 
+                </div>
+                <div class="movies-slide carousel-nav-center owl-carousel">
+                    {% for film in tutti %}
+                    <!-- MOVIE ITEM -->
+                    <div class="movie-item-wrapper">
+                        <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                            <img src="{{film[2]}}" alt=""> 
+                            <div class="movie-item-content">
+                                <div class="movie-item-title">
+                                    {{film[1]}}
+                                </div>
+                                <div class="movie-infos">
+                                    <div class="movie-info">
+                                        <i class="bx bxs-star"></i>
+                                        <span>{{film[3]}}</span>
+                                    </div>
+                                    <div class="movie-info">
+                                        <i class="bx bxs-time"></i>
+                                        <span>{{film[4]}}</span>
+                                    </div>
+                                    <div class="movie-info">
+                                        <span>{{film[5]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <form id="rate_film_{{ film[0] }}" class="rate">
+                            <input type="radio" id="star5_{{ film[0] }}" name="rate_{{ film[0] }}" value="5" />
+                            <label for="star5_{{ film[0] }}" title="text">5 stars</label>
+                            <input type="radio" id="star4_{{ film[0] }}" name="rate_{{ film[0] }}" value="4" />
+                            <label for="star4_{{ film[0] }}" title="text">4 stars</label>
+                            <input type="radio" id="star3_{{ film[0] }}" name="rate_{{ film[0] }}" value="3" />
+                            <label for="star3_{{ film[0] }}" title="text">3 stars</label>
+                            <input type="radio" id="star2_{{ film[0] }}" name="rate_{{ film[0] }}" value="2" />
+                            <label for="star2_{{ film[0] }}" title="text">2 stars</label>
+                            <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
+                            <label for="star1_{{ film[0] }}" title="text">1 star</label>
+                        </form>
+                        <form id="consiglia_film_{{ film[0] }}" class="consiglia_film_checkbox"> 
+                            {% if film[6] == 1 %}
+                            <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia" checked/>
+                            {% else %}
+                            <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
+                            {% endif %}
+                            <label for="consiglia">
+                                Consiglia
+                                <div></div>
+                            </label>
+                        </form>
+                    </div>
+                    <!-- END MOVIE ITEM -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- END tutti SECTION -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="{{ url_for('static',filename='js/film_rating.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/consiglia_film.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/segui.js') }}"></script>
+    
  {% endblock %}
     

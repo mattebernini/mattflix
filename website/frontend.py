@@ -52,4 +52,5 @@ def profilo(username_amico):
                             consigliati = get_consigliati(id_amico),
                             username_amico = username_amico,
                             id_amico = id_amico,
+                            tutti = get_tutti_film(id_amico),
                             user=current_user)
