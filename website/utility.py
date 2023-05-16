@@ -45,35 +45,6 @@ def get_film_search(str):
         if i > 20:
             break
     return films
-
-def get_best_film_by_imdb():
-    films = []
-    quanti = 20
-    ia = Cinemagoer()
-    try:
-        ia = Cinemagoer()
-        search = ia.get_top250_movies()
-    except IMDbError as e:
-        print(e)
-        return films
-    for i in range(len(search)):
-        film_id = search[i].movieID
-        # se il film non è in locale lo salvo
-        film = Film.query.filter_by(imdb_id_film=film_id).first()
-        if not film:
-            film_data = get_film_data(film_id)  
-            if film_data:
-                film = Film(imdb_id_film=film_id, title=film_data['title'], rating=film_data['rating'], tipo=film_data['kind'], year=film_data['year'], img_url=film_data['cover url'])
-                db.session.add(film)
-                db.session.flush()
-                db.session.commit()
-        film_title, film_img_url = film.title, film.img_url
-        film_fe = [film_id, film_title, film_img_url]
-        films.append(film_fe)
-        if i > quanti:
-            break
-    return films
-
 def get_film_data(id):
     ia = Cinemagoer()
     try:
@@ -130,6 +101,52 @@ def get_comune(user1, user2):
     """))
     return results
 
+def get_best_film_by_imdb():
+    films = []
+    quanti = 20
+    ia = Cinemagoer()
+    try:
+        ia = Cinemagoer()
+        search = ia.get_top250_movies()
+    except IMDbError as e:
+        print(e)
+        return films
+    for i in range(len(search)):
+        film_id = search[i].movieID
+        # se il film non è in locale lo salvo
+        film = Film.query.filter_by(imdb_id_film=film_id).first()
+        if not film:
+            film_data = get_film_data(film_id)  
+            if film_data:
+                film = Film(imdb_id_film=film_id, title=film_data['title'], rating=film_data['rating'], tipo=film_data['kind'], year=film_data['year'], img_url=film_data['cover url'])
+                db.session.add(film)
+                db.session.flush()
+                db.session.commit()
+        film_title, film_img_url = film.title, film.img_url
+        film_fe = [film_id, film_title, film_img_url]
+        films.append(film_fe)
+        if i > quanti:
+            break
+    return films
+
+def get_best_amici(id):
+    print(id)
+    results =  db.session.execute(text(f"""
+    select film.imdb_id_film, title, img_url, round(avg(voto_utente), 1) as rating, year, tipo, count(consigliato) as consigli, count(da_vedere), count(film.imdb_id_film) as n_voti
+    from recensione inner join film
+        on recensione.imdb_id_film = film.imdb_id_film
+    where id_utente in (
+        select segue
+        from Seguaci
+        where id_utente = {id}
+    )
+    and voto_utente > 0
+    and id_utente != {id}
+    group by film.imdb_id_film
+    order by rating desc, n_voti desc, consigli desc
+    limit 20
+    """))
+    return results
 # Users
 # *****************************************************
 def get_seguiti(user_id):

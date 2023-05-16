@@ -10,7 +10,6 @@ https://www.omdbapi.com/
 film peggiori
 ai sui gusti
 pagina profilo visibile senza login
-pagina consigliati (top film by rating, ai, consigli amici, ...)
 
 # issues
 velocita caricamento tante immagini

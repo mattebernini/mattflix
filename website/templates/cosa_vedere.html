@@ -16,6 +16,57 @@
                                 <div class="movie-item-title">
                                     {{film[1]}}
                                 </div>
+                            </div>
+                        </a>
+                        <form id="rate_film_{{ film[0] }}" class="rate">
+                            <input type="radio" id="star5_{{ film[0] }}" name="rate_{{ film[0] }}" value="5" />
+                            <label for="star5_{{ film[0] }}" title="text">5 stars</label>
+                            <input type="radio" id="star4_{{ film[0] }}" name="rate_{{ film[0] }}" value="4" />
+                            <label for="star4_{{ film[0] }}" title="text">4 stars</label>
+                            <input type="radio" id="star3_{{ film[0] }}" name="rate_{{ film[0] }}" value="3" />
+                            <label for="star3_{{ film[0] }}" title="text">3 stars</label>
+                            <input type="radio" id="star2_{{ film[0] }}" name="rate_{{ film[0] }}" value="2" />
+                            <label for="star2_{{ film[0] }}" title="text">2 stars</label>
+                            <input type="radio" id="star1_{{ film[0] }}" name="rate_{{ film[0] }}" value="1" />
+                            <label for="star1_{{ film[0] }}" title="text">1 star</label>
+                        </form>
+                        <form id="consiglia_film_{{ film[0] }}" class="consiglia_film checkbox"> 
+                            <input type="checkbox" name="consiglia_{{ film[0] }}" id="consiglia"/>
+                            <label for="consiglia">
+                                Consiglia
+                                <div></div>
+                            </label>
+                        </form>
+                        <form id="da_vedere_{{ film[0] }}" class="checkbox da_vedere"> 
+                                <input type="checkbox" name="da_vedere_{{ film[0] }}" id="da_vedere"/>
+                                <label for="da_vedere">
+                                    Da Vedere
+                                    <div></div>
+                                </label>
+                        </form>
+                    </div>
+                    <!-- END MOVIE ITEM -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- END migliori SECTION -->
+        <!-- amici SECTION -->
+        <div class="section">
+            <div class="container">
+                <div class="section-header">
+                    migliori per i tuoi amici
+                </div>
+                <div class="movies-slide carousel-nav-center owl-carousel">
+                    {% for film in amici %}
+                    <!-- MOVIE ITEM -->
+                    <div class="movie-item-wrapper">
+                        <a target="_blank" href="https://www.imdb.com/title/tt{{film[0]}}" class="movie-item">
+                            <img src="{{film[2]}}" alt=""> 
+                            <div class="movie-item-content">
+                                <div class="movie-item-title">
+                                    {{film[1]}}
+                                </div>
                                 <div class="movie-infos">
                                     <div class="movie-info">
                                         <i class="bx bxs-star"></i>
@@ -27,6 +78,12 @@
                                     </div>
                                     <div class="movie-info">
                                         <span>{{film[5]}}</span>
+                                    </div>
+                                    <div class="movie-info">
+                                        <span>consigliato {{film[6]}} volte</span>
+                                    </div>
+                                    <div class="movie-info">
+                                        <span>votato {{film[8]}} volte</span>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <!-- END migliori SECTION -->
+        <!-- END amici SECTION -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="{{ url_for('static',filename='js/film_rating.js') }}"></script>
         <script src="{{ url_for('static',filename='js/consiglia_film.js') }}"></script>

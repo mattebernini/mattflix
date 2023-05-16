@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from website.utility import get_best_film_by_imdb, get_da_vedere, get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
+from website.utility import get_best_amici, get_best_film_by_imdb, get_da_vedere, get_comune, get_seguiti, get_ti_seguono, get_tutti_utenti, get_tutti_film, save_cookie, get_film_search, get_preferiti, get_consigliati
 from flask_login import login_required, current_user
 from .models import Utente, Seguaci
 from . import db
@@ -62,5 +62,7 @@ def profilo(username_amico):
 def cosa_vedere():
     return render_template("cosa_vedere.html",
                            migliori = get_best_film_by_imdb(),
+                           amici = get_best_amici(current_user.id),
+                           serie = 0,
                             user=current_user)
 
