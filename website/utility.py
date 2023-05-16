@@ -38,12 +38,39 @@ def get_film_search(str):
         print(e)
         return films
     for i in range(len(search)):
-        # togliere film già visti
         id = search[i].movieID
         url_img = search[i]['cover url'] if 'cover url'in search[i] else ""
         film = [id, search[i]['title'], pulisci_img_url(url_img)]
         films.append(film)
-        if i > 15:
+        if i > 20:
+            break
+    return films
+
+def get_best_film_by_imdb():
+    films = []
+    quanti = 20
+    ia = Cinemagoer()
+    try:
+        ia = Cinemagoer()
+        search = ia.get_top250_movies()
+    except IMDbError as e:
+        print(e)
+        return films
+    for i in range(len(search)):
+        film_id = search[i].movieID
+        # se il film non è in locale lo salvo
+        film = Film.query.filter_by(imdb_id_film=film_id).first()
+        if not film:
+            film_data = get_film_data(film_id)  
+            if film_data:
+                film = Film(imdb_id_film=film_id, title=film_data['title'], rating=film_data['rating'], tipo=film_data['kind'], year=film_data['year'], img_url=film_data['cover url'])
+                db.session.add(film)
+                db.session.flush()
+                db.session.commit()
+        film_title, film_img_url = film.title, film.img_url
+        film_fe = [film_id, film_title, film_img_url]
+        films.append(film_fe)
+        if i > quanti:
             break
     return films
 
@@ -56,6 +83,7 @@ def get_film_data(id):
     except IMDbError as e:
         print(e)
     return movie
+
 
 def get_preferiti(user_id):
     results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo, Recensione.consigliato, Recensione.da_vedere).\
