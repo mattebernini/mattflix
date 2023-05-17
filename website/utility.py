@@ -60,7 +60,7 @@ def get_preferiti(user_id):
     results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo, Recensione.consigliato, Recensione.da_vedere).\
             join(Film, Recensione.imdb_id_film == Film.imdb_id_film).\
             filter(Recensione.id_utente == user_id, Recensione.voto_utente == 5).\
-            order_by(desc(Recensione.imdb_id_film)).all()
+            order_by(desc(Recensione.id)).all()
     return results
 
 def get_consigliati(user_id):
@@ -83,7 +83,7 @@ def get_tutti_film(user_id):
     results = db.session.query(Recensione.imdb_id_film, Film.title, Film.img_url, Recensione.voto_utente, Film.year, Film.tipo, Recensione.consigliato, Recensione.da_vedere)\
             .join(Film, Recensione.imdb_id_film == Film.imdb_id_film)\
             .filter(Recensione.id_utente == user_id, Recensione.voto_utente > 1)\
-            .order_by(Recensione.imdb_id_film.desc())\
+            .order_by(Recensione.id.desc())\
             .all()
     return results
 
