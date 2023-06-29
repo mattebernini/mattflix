@@ -2,13 +2,18 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import sys
 from flask_login import LoginManager
+import os
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'parola segreta segretissima'    
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:7yYzL~WJ?G2/RyP@16.16.104.53/flix"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:{DATABASE_PASSWORD}@16.16.104.53/flix"
     db.init_app(app)
 
     from .frontend import frontend
