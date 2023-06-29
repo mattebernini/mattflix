@@ -5,7 +5,7 @@ from flask_login import LoginManager
 import os
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv())
+load_dotenv(find_dotenv("pwd.env"))
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 db = SQLAlchemy()
